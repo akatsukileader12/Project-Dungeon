@@ -18,9 +18,11 @@ dependencies {
     // Post-processing effects (bloom, SSAO, etc.) — optional but useful
     implementation("org.jmonkeyengine:jme3-effects:$jmeVersion")
 
-    // Bullet physics for collision, traps, rigid bodies
-    implementation("org.jmonkeyengine:jme3-bullet:$jmeVersion")
-    implementation("org.jmonkeyengine:jme3-bullet-native:$jmeVersion")
+    // Bullet physics for collision, traps, rigid bodies.
+    // jme3-bullet/jme3-bullet-native were discontinued after jME 3.3, so we use
+    // Minie -- the actively maintained drop-in replacement (same com.jme3.bullet
+    // package) that supports jME 3.6+.
+    implementation("com.github.stephengold:Minie:9.0.1")
 
     // Asset loading helpers (texture atlases, model loaders)
     implementation("org.jmonkeyengine:jme3-plugins:$jmeVersion")
