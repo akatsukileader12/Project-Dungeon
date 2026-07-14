@@ -19,10 +19,9 @@ import com.jme3.scene.Node
 import com.jme3.scene.shape.Box
 import com.jme3.scene.shape.Quad
 
-fun main() {
-    val app = DungeonGame()
-    app.start()
-}
+// Platform-specific entry points (desktop/android modules) construct and
+// start DungeonGame themselves — this class has no dependency on any
+// particular renderer/context, so it works unmodified on both.
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 

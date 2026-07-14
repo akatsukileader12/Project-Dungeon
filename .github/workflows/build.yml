@@ -1,4 +1,4 @@
-name: Build & Package JAR
+name: Build Desktop JAR & Android APK
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  build:
+  desktop:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,11 +23,38 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build fat JAR
-        run: ./gradlew fatJar --no-daemon
+      - name: Build desktop fat JAR
+        run: ./gradlew :desktop:fatJar --no-daemon
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
-          name: project-dungeon-jar-${{ github.sha }}
-          path: build/libs/*-all.jar
+          name: project-dungeon-desktop-${{ github.sha }}
+          path: desktop/build/libs/*-all.jar
+
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build debug APK
+        run: ./gradlew :android:assembleDebug --no-daemon
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-dungeon-android-debug-${{ github.sha }}
+          path: android/build/outputs/apk/debug/*.apk

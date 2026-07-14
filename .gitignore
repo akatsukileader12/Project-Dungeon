@@ -6,6 +6,14 @@ build/
 # Gradle wrapper distributions cache (not the wrapper jar/properties themselves)
 gradle/wrapper/dists/
 
+# Android
+local.properties
+.cxx/
+captures/
+*.apk
+*.ap_
+*.dex
+
 # IntelliJ / Android Studio
 .idea/
 *.iml
